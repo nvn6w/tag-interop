@@ -11,6 +11,7 @@
 
 namespace Cache\TagInterop;
 
+use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
 
@@ -27,9 +28,9 @@ interface TaggableCacheItemPoolInterface extends CacheItemPoolInterface
      *
      * @param string $tag The tag to invalidate
      *
+     * @return bool True on success
      * @throws InvalidArgumentException When $tags is not valid
      *
-     * @return bool True on success
      */
     public function invalidateTag($tag);
 
@@ -38,9 +39,9 @@ interface TaggableCacheItemPoolInterface extends CacheItemPoolInterface
      *
      * @param string[] $tags An array of tags to invalidate
      *
+     * @return bool True on success
      * @throws InvalidArgumentException When $tags is not valid
      *
-     * @return bool True on success
      */
     public function invalidateTags(array $tags);
 
@@ -49,12 +50,12 @@ interface TaggableCacheItemPoolInterface extends CacheItemPoolInterface
      *
      * @return TaggableCacheItemInterface
      */
-    public function getItem($key);
+    public function getItem($key): CacheItemInterface;
 
     /**
      * {@inheritdoc}
      *
      * @return array|\Traversable|TaggableCacheItemInterface[]
      */
-    public function getItems(array $keys = []);
+    public function getItems(array $keys = []): iterable;
 }
